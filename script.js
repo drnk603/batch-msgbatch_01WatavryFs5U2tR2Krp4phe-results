@@ -216,19 +216,19 @@
         errorMessage = 'Dieses Feld ist erforderlich.';
       } else if (value) {
         if (type === 'email' || name.includes('email') || name.includes('e-mail')) {
-          const emailRegex = /^[^s@]+@[^s@]+.[^s@]+$/;
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(value)) {
             isValid = false;
             errorMessage = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
           }
         } else if (type === 'tel' || name.includes('phone') || name.includes('telefon')) {
-          const phoneRegex = /^[ds+-()]{10,20}$/;
+          const phoneRegex = /^[\d\s+\-()]{10,20}$/;
           if (!phoneRegex.test(value)) {
             isValid = false;
             errorMessage = 'Bitte geben Sie eine gültige Telefonnummer ein (10-20 Zeichen).';
           }
         } else if (name.includes('name') || name.includes('vorname') || name.includes('nachname')) {
-          const nameRegex = /^[a-zA-ZÀ-ÿs-']{2,50}$/;
+          const nameRegex = /^[a-zA-ZÀ-ÿ\s-']{2,50}$/;
           if (!nameRegex.test(value)) {
             isValid = false;
             errorMessage = 'Name sollte 2-50 Buchstaben enthalten.';
@@ -449,7 +449,7 @@
         const x = e.clientX - rect.left - size / 2;
         const y = e.clientY - rect.top - size / 2;
 
-        ripple.style.cssText = `position:absolute;width:${size}px;height:${size}px;border-radius:50%;background:rgba(255,255,255,0.6);transform:scale(0);animation:ripple 0.6s ease-out;pointer-events:none;left:${x}px;top:${y}px;`;
+        ripple.style.cssText = `position:absolute;width:${size}px;height:${size}px;border-radius:50%;background:rgba(255,255,255,0.6);transform:scale(0);animation:ripple 0.6s.ease-out;pointer-events:none;left:${x}px;top:${y}px;`.replace('.ease-out', ' ease-out');
 
         const style = document.createElement('style');
         style.textContent = '@keyframes ripple{to{transform:scale(4);opacity:0}}';
@@ -464,7 +464,7 @@
 
       document.querySelectorAll('.c-button, .c-nav__link, .c-filter__btn, .c-portfolio-card__btn').forEach(el => {
         el.addEventListener('mouseenter', function() {
-          this.style.transition = 'all 0.3s ease-out';
+          this.style.transition = 'all 0.3s.ease-out'.replace('.ease-out', ' ease-out');
           this.style.transform = 'translateY(-2px)';
         });
 
@@ -481,7 +481,7 @@
 
       document.querySelectorAll('.c-card, .c-service-card, .c-portfolio-card, .c-pricing-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
-          this.style.transition = 'transform 0.3s ease-out, box-shadow 0.3s ease-out';
+          this.style.transition = 'transform 0.3s.ease-out, box-shadow 0.3s.ease-out'.replace(/\.ease-out/g, ' ease-out');
         });
       });
     },
